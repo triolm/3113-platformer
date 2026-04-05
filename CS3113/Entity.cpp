@@ -163,8 +163,8 @@ void Entity::checkCollisionX(Map *map)
     float yOverlap = 0.0f;
 
     if(mAIType==FLYER){
-        if(map->isSolidTileAt(leftCentreProbe, &xOverlap, &yOverlap)) {moveRight(); countdown = 5;}
-        if(map->isSolidTileAt(rightCentreProbe, &xOverlap, &yOverlap)) {moveLeft(); countdown = 5;}
+        if(map->isSolidTileAt(leftCentreProbe, &xOverlap, &yOverlap)) {moveRight(); countdown = 3;}
+        if(map->isSolidTileAt(rightCentreProbe, &xOverlap, &yOverlap)) {moveLeft(); countdown = 3;}
     }
 
     // COLLISION ON RIGHT (moving right)

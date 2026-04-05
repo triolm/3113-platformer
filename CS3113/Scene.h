@@ -5,7 +5,7 @@
 
 struct GameState
 {
-    Entity *xochitl = nullptr;
+    Entity *goots = nullptr;
     Entity **babies = nullptr;
     Entity *evilgoots = nullptr;
     Entity *flygoots = nullptr;

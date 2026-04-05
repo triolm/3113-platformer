@@ -29,7 +29,7 @@ void Level::initialise()
    /*
       ----------- PROTAGONIST -----------
    */
-   std::map<Direction, std::vector<int>> xochitlAnimationAtlas = {
+   std::map<Direction, std::vector<int>> gootsAnimationAtlas = {
       {UPRIGHT,  {  0,1,2,3,4,5,6,7,8,9 }},
       {RIGHT,  {  14,15,16,17,18,19,20,21,22,23,24,25 }},
       {UPLEFT,    { 28,29,30,31,32,33,34,35,36,37 }},
@@ -40,13 +40,13 @@ void Level::initialise()
 
    float sizeRatio  = 48.0f / 64.0f;
 
-   mGameState.xochitl = new Entity(
+   mGameState.goots = new Entity(
       {mOrigin.x - 400, mOrigin.y - 150}, // position
       {150.0f, 100.0f},             // scale
       "assets/goots.png",                   // texture file address
       ATLAS,                                    // single image or atlas?
       { 8, 7 },                                 // atlas dimensions
-      xochitlAnimationAtlas,                    // actual atlas
+      gootsAnimationAtlas,                    // actual atlas
       PLAYER                                    // entity type
    );
 
@@ -62,7 +62,7 @@ void Level::initialise()
         "assets/babies.png",                   // texture file address
         ATLAS,                                    // single image or atlas?
         { 8, 7 },                                 // atlas dimensions
-        xochitlAnimationAtlas,                    // actual atlas
+        gootsAnimationAtlas,                    // actual atlas
         NPC                                    // entity type
     );
     mGameState.babies[i]->setFollowDist(80 + i * 30);
@@ -81,7 +81,7 @@ void Level::initialise()
         "assets/evilgoot.png",                   // texture file address
         ATLAS,                                    // single image or atlas?
         { 8, 7 },                                 // atlas dimensions
-        xochitlAnimationAtlas,                    // actual atlas
+        gootsAnimationAtlas,                    // actual atlas
         NPC                                    // entity type
     );
     mGameState.evilgoots->setAIType(WANDERER);
@@ -102,7 +102,7 @@ void Level::initialise()
         "assets/evilgoot.png",                   // texture file address
         ATLAS,                                    // single image or atlas?
         { 8, 7 },                                 // atlas dimensions
-        xochitlAnimationAtlas,                    // actual atlas
+        gootsAnimationAtlas,                    // actual atlas
         NPC                                    // entity type
     );
     mGameState.flygoots->setAIType(FLYER);
@@ -142,19 +142,19 @@ void Level::initialise()
 
 
 
-   mGameState.xochitl->setJumpingPower(400.0f);
-   mGameState.xochitl->setColliderDimensions({
-      mGameState.xochitl->getScale().x/ 3.0f,
-      mGameState.xochitl->getScale().y / 1.05f
+   mGameState.goots->setJumpingPower(400.0f);
+   mGameState.goots->setColliderDimensions({
+      mGameState.goots->getScale().x/ 3.0f,
+      mGameState.goots->getScale().y / 1.05f
    });
-   mGameState.xochitl->setAcceleration({0.0f, ACCELERATION_OF_GRAVITY});
+   mGameState.goots->setAcceleration({0.0f, ACCELERATION_OF_GRAVITY});
 }
 
 void Level::update(float deltaTime)
 {
 //    UpdateMusicStream(mGameState.bgm);
 
-   mGameState.xochitl->update(
+   mGameState.goots->update(
       deltaTime,      // delta time / fixed timestep
       nullptr,        // player
       mGameState.map, // map
@@ -165,7 +165,7 @@ void Level::update(float deltaTime)
    if(evilgoots){
         mGameState.evilgoots->update(
         deltaTime,      // delta time / fixed timestep
-        mGameState.xochitl,        // player
+        mGameState.goots,        // player
         mGameState.map, // map
         nullptr,        // collidable entities
         0               // col. entity count
@@ -174,7 +174,7 @@ void Level::update(float deltaTime)
    if(flygoots){
         mGameState.flygoots->update(
         deltaTime,      // delta time / fixed timestep
-        mGameState.xochitl,        // player
+        mGameState.goots,        // player
         mGameState.map, // map
         nullptr,        // collidable entities
         0               // col. entity count
@@ -183,14 +183,14 @@ void Level::update(float deltaTime)
    if(plat){
         mGameState.movingPlat->update(
         deltaTime,      // delta time / fixed timestep
-        mGameState.xochitl,        // player
+        mGameState.goots,        // player
         mGameState.map, // map
         nullptr,        // collidable entities
         0               // col. entity count
     );
     }
 
-   if(mGameState.xochitl->onDeadlyTile()) {
+   if(mGameState.goots->onDeadlyTile()) {
         --*lives;
         shutdown();
         initialise();
@@ -208,7 +208,7 @@ void Level::update(float deltaTime)
     }
     mGameState.babies[i]->update(
        deltaTime,      // delta time / fixed timestep
-       mGameState.xochitl,        // player
+       mGameState.goots,        // player
        mGameState.map, // map
        mGameState.movingPlat,        // collidable entities
        mGameState.movingPlat ? 1: 0                // col. entity count
@@ -218,7 +218,7 @@ void Level::update(float deltaTime)
 
    mGameState.knife->update(
       deltaTime,      // delta time / fixed timestep
-      mGameState.xochitl,        // player
+      mGameState.goots,        // player
       mGameState.map, // map
       nullptr,        // collidable entities
       0               // col. entity count
@@ -250,7 +250,7 @@ void Level::render()
    ClearBackground(ColorFromHex(mBGColourHexCode));
 
    mGameState.map->render();
-   mGameState.xochitl->render();
+   mGameState.goots->render();
    mGameState.knife->render();
    for(int i = 0; i < babies; ++i){
     mGameState.babies[i]->render();
@@ -263,8 +263,8 @@ void Level::render()
 
 void Level::shutdown()
 {
-   if (mGameState.xochitl) delete mGameState.xochitl;
-   mGameState.xochitl = nullptr;
+   if (mGameState.goots) delete mGameState.goots;
+   mGameState.goots = nullptr;
 
    for(int i = 0; mGameState.babies && i < babies; ++i) {
       delete mGameState.babies[i];

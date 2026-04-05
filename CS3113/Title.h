@@ -17,6 +17,8 @@ private:
     bool evilgoots;
     bool flygoots;
     const char* filepath;
+
+    Entity* goose;
     
 
 public:
