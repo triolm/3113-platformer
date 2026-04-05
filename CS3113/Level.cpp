@@ -272,7 +272,11 @@ void Level::shutdown()
    delete [] mGameState.babies;
    mGameState.babies = nullptr;
 
-   if(mGameState.knife) delete mGameState.knife;
+   if(mGameState.knife) {
+      delete mGameState.knife;
+      //dont ask
+      UnloadSound(mGameState.jumpSound);
+   }
    mGameState.knife = nullptr;
 
    if(mGameState.map) delete mGameState.map;
@@ -284,6 +288,7 @@ void Level::shutdown()
    if(flygoots) delete mGameState.flygoots;
    mGameState.flygoots=nullptr;
 
+   if(plat) delete mGameState.movingPlat;
+
 //    UnloadMusicStream(mGameState.bgm);
-   // if(IsSoundValid(mGameState.jumpSound)) UnloadSound(mGameState.jumpSound);
 }

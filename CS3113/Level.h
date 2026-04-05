@@ -27,7 +27,7 @@ public:
 
     Level();
     Level(Vector2 origin,  const char *bgHexCode,  int* lives, unsigned int* levelData, int levelWidth, int levelHeight, int nextIndex, bool evilgoots = false, bool flygoots = false, bool plat = false);
-    ~Level();
+    virtual ~Level();
 
     void initialise() override;
     void update(float deltaTime) override;

@@ -313,9 +313,7 @@ void Entity::update(float deltaTime, Entity *player, Map *map,
     resetColliderFlags();
 
     if(mEntityType == PLATFORM && countdown > 0){
-        printf("%f ", deltaTime);
         countdown -= deltaTime;
-        printf("%f\n", countdown);
         return;
     }
     
@@ -337,7 +335,6 @@ void Entity::update(float deltaTime, Entity *player, Map *map,
     mPosition.y += mVelocity.y * deltaTime;
 
      if(collisionCheckCount && isColliding(&collidableEntities[0])){
-        printf("HI\n");
         mPosition.x += collidableEntities[0].mVelocity.x * deltaTime;
     }
 
@@ -352,7 +349,7 @@ void Entity::update(float deltaTime, Entity *player, Map *map,
 
     if(map) checkCollisionDeadlyTile(map);
 
-    if((mEntityType == BLOCK || (mEntityType == NPC && mAIType == WANDERER) || (mEntityType == NPC && mAIType == FLYER)) && isColliding(player)){
+    if(player && ((mEntityType == BLOCK || (mEntityType == NPC && mAIType == WANDERER) || (mEntityType == NPC && mAIType == FLYER)) && isColliding(player))){
         deactivate();
     }
 
