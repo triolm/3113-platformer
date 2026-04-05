@@ -9,4 +9,4 @@ All of the textures are drawn by me. This is my first time animating something b
 [geese crying in pain](https://pixabay.com/sound-effects/nature-geese-freaking-out-25661/)
 
 ## Known Issues
-I really hope there are no segfaults or memory leaks, but 
+I really hope there are no segfaults or memory leaks, but I keep finding them.

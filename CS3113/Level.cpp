@@ -289,6 +289,7 @@ void Level::shutdown()
    mGameState.flygoots=nullptr;
 
    if(plat) delete mGameState.movingPlat;
+   mGameState.movingPlat = nullptr;
 
 //    UnloadMusicStream(mGameState.bgm);
 }
